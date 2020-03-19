@@ -1,4 +1,4 @@
-package javah;
+package arrays;
 
 public class TestArray {
 	
