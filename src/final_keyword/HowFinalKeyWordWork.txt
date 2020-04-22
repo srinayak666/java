@@ -1,0 +1,58 @@
+In Java we use final keyword with variables to specify its values are not to be changed. But I see that you can change the value in the constructor / methods of the class. 
+Again, if the variable is static then it is a compilation error.
+
+Here is the code:
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Test {
+  private final List foo;
+
+  public Test()
+  {
+      foo = new ArrayList();
+      foo.add("foo"); // Modification-1
+  }
+  public static void main(String[] args) 
+  {
+      Test t = new Test();
+      t.foo.add("bar"); // Modification-2
+      System.out.println("print - " + t.foo);
+  }
+}
+Above code works fine and no errors.
+
+Now change the variable as static:
+
+private static final List foo;
+Now it is a compilation error. How does this final really work?
+
+
+
+-You are always allowed to initialize a final variable. 
+-The compiler makes sure that you can do it only once.
+-Note that calling methods on an object stored in a final variable has nothing to do with the semantics of final. 
+-In other words: final is only about the reference itself, and not about the contents of the referenced object.
+-Java has no concept of object immutability; this is achieved by carefully designing the object, and is a far-from-trivial endeavor.
+
+
+-The final keyword can be interpreted in two different ways depending on what it's used on:
+Value types: For ints, doubles etc, it will ensure that the value cannot change,
+Reference types: For references to objects, final ensures that the reference will never change, meaning that it will always refer to the same object. 
+It makes no guarantees whatsoever about the values inside the object being referred to staying the same.
+
+As such, final List<Whatever> foo; ensures that foo always refers to the same list, but the contents of said list may change over time.
+
+
+
+
+
+
+
+
+
+
+
+
+
